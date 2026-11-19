@@ -1,0 +1,72 @@
+<Window x:Class="WorkspaceRestorer.UI.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Workspace Restorer — Settings"
+        Width="420" Height="480"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Settings" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12" />
+
+        <!-- Interval -->
+        <GroupBox Grid.Row="1" Header="Snapshot Interval" Padding="8" Margin="0,0,0,10">
+            <StackPanel>
+                <DockPanel>
+                    <TextBlock Text="Capture every" VerticalAlignment="Center" />
+                    <TextBox x:Name="IntervalBox" Width="50" Margin="8,0" TextAlignment="Center"
+                             VerticalAlignment="Center" KeyDown="Interval_KeyDown" LostFocus="Interval_LostFocus" />
+                    <TextBlock Text="seconds (5–300)" VerticalAlignment="Center" />
+                </DockPanel>
+                <TextBlock Text="Lower values capture more frequently but use slightly more CPU."
+                           Foreground="#777" FontSize="11" Margin="0,4,0,0" />
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Behavior -->
+        <GroupBox Grid.Row="2" Header="Behavior" Padding="8" Margin="0,0,0,10">
+            <StackPanel>
+                <CheckBox x:Name="StartWithWindowsBox" Content="Start with Windows" Margin="0,2" />
+                <CheckBox x:Name="SkipMinimizedBox" Content="Skip minimized windows when capturing" Margin="0,2" />
+                <CheckBox x:Name="RestoreMaximizedBox" Content="Restore maximized windows as maximized" Margin="0,2" />
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Launch delay -->
+        <GroupBox Grid.Row="3" Header="Restore" Padding="8" Margin="0,0,0,10">
+            <DockPanel>
+                <TextBlock Text="Delay between launches" VerticalAlignment="Center" />
+                <TextBox x:Name="DelayBox" Width="50" Margin="8,0" TextAlignment="Center"
+                         VerticalAlignment="Center" LostFocus="Delay_LostFocus" />
+                <TextBlock Text="ms" VerticalAlignment="Center" />
+            </DockPanel>
+        </GroupBox>
+
+        <!-- Data folder -->
+        <GroupBox Grid.Row="4" Header="Data" Padding="8" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="{Binding DataPath, StringFormat=Data folder: {0}}" TextWrapping="Wrap" FontSize="11" Foreground="#555" />
+                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                    <Button Content="Open Folder" Width="100" Margin="0,0,8,0" Click="OpenFolder_Click" />
+                    <Button Content="Clear Session" Width="100" Click="ClearSession_Click" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Cancel" Width="90" Margin="0,0,8,0" IsCancel="True" Click="Cancel_Click" />
+            <Button Content="Save" Width="90" FontWeight="SemiBold" IsDefault="True" Click="Save_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
